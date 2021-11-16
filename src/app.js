@@ -53,7 +53,7 @@ export default function App() {
   //onclick
   const onClick = useCallback(event => {
     alert(`Region:  ${event.features[0].properties.region} \nCountry: ${event.features[0].properties.name}`);
-    // alert("Region: " + event.features[0].properties.name);
+    
   }, []);
 
   const data = useMemo(() => {
