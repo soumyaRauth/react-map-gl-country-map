@@ -1,4 +1,4 @@
-# Example: GeoJSON
+# Example: Eximtel Map Example GeoJSON
 
 This example showcases how to dynamically add and update custom data sources.
 
