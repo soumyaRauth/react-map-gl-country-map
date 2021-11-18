@@ -7,13 +7,13 @@ export const dataLayer = {
       property: 'name',
       type: 'categorical',
       stops: [
-        ['Bangladesh', '#E74C3C'],
+        ['Bangladesh', '#EB984E'],
         ['Bhutan', '#EB984E'],
-        ['India', '#5DADE2'],
-        ['Pakistan', '#2ECC71'],
-        ['Nepal', '#F9E79F'],
-        ['Afghanistan', '#1F618D'],
-        ['Sri Lanka', '#1A5276'],
+        ['India', '#EB984E'],
+        ['Pakistan', '#EB984E'],
+        ['Nepal', '#EB984E'],
+        ['Afghanistan', '#EB984E'],
+        ['Sri Lanka', '#EB984E'],
       ]
     },
     'fill-opacity': 0.5
