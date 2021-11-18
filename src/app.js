@@ -1,12 +1,12 @@
 import * as React from "react";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState,useRef, useEffect, useMemo, useCallback } from "react";
 import { render } from "react-dom";
 import MapGL, { Source, Layer } from "react-map-gl";
 import Pins from "../data_source/pins.js";
 import ControlPanel from "./control-panel";
 import { dataLayer } from "./map-style.js";
 import { updatePercentiles } from "./utils";
-import CITIES from '../data_source/cities.json';
+import CITIES from "../data_source/cities.json";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoic2hvdW1tb3JhdXRoIiwiYSI6ImNrdTE0OTA5YTB6ZGQybnBjN3U4dTA3eHkifQ.YBf9n4C77kkV_vePiPHamQ"; // Set your mapbox token here
@@ -22,17 +22,45 @@ export default function App() {
   const [year, setYear] = useState(null);
   const [allData, setAllData] = useState(null);
   const [hoverInfo, setHoverInfo] = useState(null);
+  const [pinInfo, setPinInfo] = useState(null);
 
   useEffect(() => {
     /* global fetch */
     fetch(
       // './bd_banani_polygon.json'
-      "./data_source/south_asia.json"
+      "./data_source/asia.json"
       // './data.json',
     )
       .then((resp) => resp.json())
       .then((json) => setAllData(json));
   }, []);
+
+
+
+ const isMounted=function useIsMounted() {
+    const isMounted = useRef(false);
+  
+    useEffect(() => {
+      isMounted.current = true;
+      return () => isMounted.current = false;
+    }, []);
+  
+    return isMounted;
+  }
+
+
+  //Get the city info on click
+  useEffect(() => {
+    console.log("This is pin info");
+    if(pinInfo){
+      alert(`REGION: ${pinInfo.region}`); 
+    }else{
+      console.log("No data");
+    }
+    // console.log(isMounted.current? pinInfo:"");
+    console.log("This is pin data");
+    
+  }, [pinInfo]);
 
   const onHover = useCallback((event) => {
     const {
@@ -51,6 +79,11 @@ export default function App() {
         : null
     );
   }, []);
+
+  const getPinData = (event) => {
+    console.log("This is event");
+    console.log(event);
+  };
 
   //onclick
   const onClick = useCallback((event) => {
@@ -78,10 +111,10 @@ export default function App() {
         onHover={onHover}
         onClick={onClick}
       >
-        
         <Source type="geojson" data={data}>
           <Layer {...dataLayer} />
-          <Pins data={CITIES}  />
+          {/* This is the pin marker on different cities */}
+          <Pins data={CITIES} onClick={setPinInfo} />
         </Source>
 
         {hoverInfo && (
