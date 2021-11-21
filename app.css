@@ -1,12 +1,22 @@
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
- 
 }
 #map {
   width: 100vw;
   height: 100vh;
+  
 }
+
+.map-overlay {
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  position: absolute;
+  width: 200px;
+  top: 0;
+  background-color: red;
+  left: 0;
+  padding: 10px;
+  }
 
 .control-panel {
   position: absolute;
@@ -14,7 +24,7 @@ body {
   right: 0;
   max-width: 320px;
   background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   padding: 12px 24px;
   margin: 20px;
   font-size: 13px;
@@ -58,4 +68,16 @@ input {
   text-align: center;
 
   font: 10px Arial, sans-serif;
+}
+
+.marker-label {
+  font-family: "Inder", sans-serif;
+  line-height: 28px;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.region-label{
+  color: rgb(180, 180, 180);
+  font-family: Arial, Helvetica, sans-serif;
 }

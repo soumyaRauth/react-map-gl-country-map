@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useRef, useEffect, useMemo, useCallback } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { render } from "react-dom";
 import MapGL, { Source, Layer } from "react-map-gl";
 import Pins from "../data_source/pins.js";
@@ -8,6 +8,7 @@ import { dataLayer } from "./map-style.js";
 import { updatePercentiles } from "./utils";
 import CITIES from "../data_source/cities.json";
 
+// pk.eyJ1Ijoic2hvdW1tb3JhdXRoIiwiYSI6ImNrdTE0OTA5YTB6ZGQybnBjN3U4dTA3eHkifQ.YBf9n4C77kkV_vePiPHamQ
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoic2hvdW1tb3JhdXRoIiwiYSI6ImNrdTE0OTA5YTB6ZGQybnBjN3U4dTA3eHkifQ.YBf9n4C77kkV_vePiPHamQ"; // Set your mapbox token here
 
@@ -15,7 +16,11 @@ export default function App() {
   const [viewport, setViewport] = useState({
     latitude: 20.5937,
     longitude: 78.9629,
-    zoom: 3,
+    zoom: 4,
+    maxBounds: [
+      [-77.875588, 38.50705], // Southwest coordinates
+      [-76.15381, 39.548764], // Northeast coordinates
+    ],
     bearing: 0,
     pitch: 0,
   });
@@ -35,55 +40,49 @@ export default function App() {
       .then((json) => setAllData(json));
   }, []);
 
-
-
- const isMounted=function useIsMounted() {
+  const isMounted = function useIsMounted() {
     const isMounted = useRef(false);
-  
+
     useEffect(() => {
       isMounted.current = true;
-      return () => isMounted.current = false;
+      return () => (isMounted.current = false);
     }, []);
-  
-    return isMounted;
-  }
 
+    return isMounted;
+  };
 
   //Get the city info on click
   useEffect(() => {
     console.log("This is pin info");
-    if(pinInfo){
-      alert(`REGION: ${pinInfo.region}`); 
-    }else{
+    if (pinInfo) {
+      alert(`REGION: ${pinInfo.region}`);
+    } else {
       console.log("No data");
     }
     // console.log(isMounted.current? pinInfo:"");
     console.log("This is pin data");
-    
   }, [pinInfo]);
 
   const onHover = useCallback((event) => {
-    const {
-      features,
-      srcEvent: { offsetX, offsetY },
-    } = event;
-    const hoveredFeature = features && features[0];
+    //Checks whether the hover is on the marker or not. If the hover is on the marker then hide the tooltip
+    if (event.target.classList[0] == "overlays") {
+      const {
+        features,
+        srcEvent: { offsetX, offsetY },
+      } = event;
+      const hoveredFeature = features && features[0];
 
-    setHoverInfo(
-      hoveredFeature
-        ? {
-            feature: hoveredFeature,
-            x: offsetX,
-            y: offsetY,
-          }
-        : null
-    );
+      setHoverInfo(
+        hoveredFeature
+          ? {
+              feature: hoveredFeature,
+              x: offsetX,
+              y: offsetY,
+            }
+          : null
+      );
+    }
   }, []);
-
-  const getPinData = (event) => {
-    console.log("This is event");
-    console.log(event);
-  };
 
   //onclick
   const onClick = useCallback((event) => {
@@ -104,16 +103,18 @@ export default function App() {
         {...viewport}
         width="100%"
         height="100%"
-        mapStyle="mapbox://styles/mapbox/light-v9"
+        mapStyle="mapbox://styles/shoummorauth/ckw8z8avm3fcs14paluhc6a4v"
         onViewportChange={setViewport}
         mapboxApiAccessToken={MAPBOX_TOKEN}
         interactiveLayerIds={["data"]}
         onHover={onHover}
         onClick={onClick}
+        renderWorldCopies= "true"
       >
         <Source type="geojson" data={data}>
           <Layer {...dataLayer} />
           {/* This is the pin marker on different cities */}
+          {/* <div>{}</div> */}
           <Pins data={CITIES} onClick={setPinInfo} />
         </Source>
 

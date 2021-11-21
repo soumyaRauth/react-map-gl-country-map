@@ -7,21 +7,21 @@ export const dataLayer = {
       property: 'name',
       type: 'categorical',
       stops: [
-        ['Bangladesh', '#EB984E'],
-        ['Bhutan', '#EB984E'],
-        ['India', '#EB984E'],
-        ['Pakistan', '#EB984E'],
-        ['Nepal', '#EB984E'],
-        ['Afghanistan', '#EB984E'],
-        ['Sri Lanka', '#EB984E'],
-        ['Saudi Arabia', '#2ECC71'],
-        ['Yemen', '#2ECC71'],
-        ['Oman', '#2ECC71'],
-        ['UAE', '#2ECC71'],
-        ['Qatar', '#2ECC71'],
-        ['Kuwait', '#2ECC71'],
+        ['Bangladesh', '#f1f5f9'],
+        ['Bhutan', '#f1f5f9'],
+        ['India', '#f1f5f9'],
+        ['Pakistan', '#f1f5f9'],
+        ['Nepal', '#f1f5f9'],
+        ['Afghanistan', '#f1f5f9'],
+        ['Sri Lanka', '#f1f5f9'],
+        ['Saudi Arabia', '#f1f5f9'],
+        ['Yemen', '#f1f5f9'],
+        ['Oman', '#f1f5f9'],
+        ['UAE', '#f1f5f9'],
+        ['Qatar', '#f1f5f9'],
+        ['Kuwait', '#f1f5f9'],
       ]
     },
-    'fill-opacity': 0.5
+    'fill-opacity': 1
   }
 };

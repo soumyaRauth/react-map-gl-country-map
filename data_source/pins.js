@@ -2,9 +2,8 @@ import * as React from "react";
 import { Marker } from "react-map-gl";
 
 
-const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
-  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
-  C20.1,15.8,20.2,15.8,20.2,15.7z`;
+const ICON = `M8.36,6.481C8.203,4.852,7.838,2.485,7.189,0.88C6.423,1.242,5.75,1.748,5.16,2.361C6.753,3.708,7.822,5.457,8.36,6.481z`;
+  const UNIT = "px";
 
 // const SIZE = 40;
 
@@ -18,8 +17,10 @@ function Pins(props) {
     longitude={city.longitude}
     latitude={city.latitude}
     label="hello"
+     
     >
-      <div class="circle" onClick={() => onClick(city)}>{city.region}</div>
+      {/* <div class="circle" onClick={() => onClick(city)}>{city.region}</div> */}
+      <small class="region-label">{city.region}</small>
     
       <svg
         height={city.size}
@@ -28,7 +29,9 @@ function Pins(props) {
           cursor: "pointer",
           fill: city.color,
           stroke: "none",
-          transform: `translate(${-city.size / 2}px,${-city.size}px)`,
+          fillOpacity:0.3
+          // transform: `translate(0px,0px)`,
+          // transform: `translate(${SIZE/2 + UNIT}, ${SIZE/2 + UNIT}`
         }}
         onClick={() => onClick(city)}
       >

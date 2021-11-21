@@ -15,10 +15,10 @@ export function updatePercentiles(featureCollection, accessor) {
         percentile: scale(value),
         style: function(feature) {
           return {
-            fillColor: "#D3D3D3", // Default color of countries.
+            fillColor: "red", // Default color of countries.
             fillOpacity: 1,
             stroke: true,
-            color: "grey", // Lines in between countries.
+            color: "red", // Lines in between countries.
             weight: 2
           };
         }
